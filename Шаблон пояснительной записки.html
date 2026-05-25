@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Шаблон пояснительной записки ВКР</title>
+<style>
+  /* Общие параметры документа */
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 14pt;
+    line-height: 1.5;
+    color: #000;
+    background: #f0f0f0;
+    margin: 0;
+    padding: 20px 0;
+  }
+
+  /* Страница */
+  .page {
+    background: white;
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto 20px auto;
+    padding: 20mm 15mm 20mm 30mm;
+    box-sizing: border-box;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    page-break-after: always;
+  }
+
+  /* Подсказки для студентов */
+  .hint {
+    background: #fff8e1;
+    border: 1px dashed #f9a825;
+    color: #5d4037;
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    padding: 4px 8px;
+    margin: 4px 0;
+    border-radius: 3px;
+    font-style: normal;
+  }
+
+  .placeholder {
+    color: #1565c0;
+    font-style: italic;
+  }
+
+  /* Титульный лист */
+  .title-page {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 257mm;
+  }
+  .title-ministry {
+    font-size: 11pt;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .title-college {
+    font-size: 12pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+  .title-label {
+    font-size: 13pt;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .title-theme {
+    font-size: 16pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 10px 40px;
+    line-height: 1.4;
+  }
+  .title-specialty {
+    font-size: 12pt;
+    margin-top: 10px;
+  }
+  .title-sign-block {
+    text-align: left;
+    margin-top: auto;
+    font-size: 12pt;
+    line-height: 2;
+  }
+  .title-sign-block table {
+    border: none;
+    width: 100%;
+  }
+  .title-sign-block td {
+    border: none;
+    padding: 2px 4px;
+    vertical-align: bottom;
+  }
+  .sign-line {
+    border-bottom: 1px solid #000;
+    display: inline-block;
+    min-width: 120px;
+  }
+  .title-year {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13pt;
+  }
+
+  /* Заголовки */
+  h1 {
+    font-size: 14pt;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0 0 20px 0;
+    padding: 0;
+  }
+  h2 {
+    font-size: 14pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 20px 0 10px 0;
+    padding: 0;
+  }
+  h3 {
+    font-size: 14pt;
+    font-weight: bold;
+    margin: 15px 0 8px 0;
+    padding: 0;
+  }
+
+  /* Содержание */
+  .toc-item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted #999;
+    margin: 4px 0;
+    padding: 2px 0;
+  }
+  .toc-sub {
+    padding-left: 20px;
+  }
+  .toc-subsub {
+    padding-left: 40px;
+  }
+
+  /* Текст */
+  p {
+    margin: 0 0 10px 0;
+    text-indent: 1.25cm;
+  }
+  p.no-indent {
+    text-indent: 0;
+  }
+
+  /* Таблица */
+  table.doc-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0;
+    font-size: 12pt;
+  }
+  table.doc-table th, table.doc-table td {
+    border: 1px solid #000;
+    padding: 5px 8px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.doc-table th {
+    font-weight: bold;
+    text-align: center;
+    background: #f5f5f5;
+  }
+  .table-caption {
+    font-size: 14pt;
+    margin-bottom: 4px;
+    text-indent: 0;
+  }
+
+  /* Рисунок */
+  .figure-box {
+    text-align: center;
+    margin: 15px 0;
+    border: 1px dashed #ccc;
+    padding: 20px;
+    background: #fafafa;
+  }
+  .figure-caption {
+    text-align: center;
+    font-size: 14pt;
+    margin-top: 6px;
+  }
+
+  /* Нумерация страниц */
+  .page-num {
+    position: absolute;
+    bottom: 10mm;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 12pt;
+  }
+
+  /* Список */
+  ul.doc-list, ol.doc-list {
+    margin: 0 0 10px 1.25cm;
+    padding: 0 0 0 20px;
+  }
+  ul.doc-list li, ol.doc-list li {
+    margin-bottom: 4px;
+  }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .page { box-shadow: none; margin: 0; }
+    .hint { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ======== СТРАНИЦА 1: ТИТУЛЬНЫЙ ЛИСТ ======== -->
+<div class="page">
+  <div class="title-page">
+    <div class="title-ministry">Министерство науки и высшего образования Российской Федерации</div>
+    <div class="title-college">
+      ФГБОУ ВО «КНИТУ»<br>
+      Казанский технологический колледж
+    </div>
+
+    <div class="title-label">Выпускная квалификационная работа</div>
+    <div class="title-theme">
+      <span class="placeholder">[НАЗВАНИЕ ТЕМЫ ПРОПИСНЫМИ БУКВАМИ]</span>
+    </div>
+    <div class="title-specialty">
+      Специальность 09.02.07 «Информационные системы и программирование»
+    </div>
+
+    <div class="title-sign-block">
+      <table>
+        <tr>
+          <td width="50%">Студент группы <span class="placeholder">[09XX-2X]</span></td>
+          <td>___________________</td>
+          <td><span class="placeholder">[Фамилия И.О.]</span></td>
+        </tr>
+        <tr>
+          <td>Руководитель ВКР</td>
+          <td>___________________</td>
+          <td><span class="placeholder">[ФИО руководителя]</span></td>
+        </tr>
+        <tr>
+          <td>Рецензент</td>
+          <td>___________________</td>
+          <td><span class="placeholder">[ФИО рецензента]</span></td>
+        </tr>
+        <tr>
+          <td>Допущен к защите:<br>Зам. директора по УР</td>
+          <td>___________________</td>
+          <td><span class="placeholder">[ФИО]</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="title-year">Казань, 2026</div>
+  </div>
+</div>
+
+<!-- ======== СТРАНИЦА 2: СОДЕРЖАНИЕ ======== -->
+<div class="page">
+  <h1>Содержание</h1>
+  <div class="hint">Содержание генерируется автоматически в Word: Ссылки → Оглавление. Ниже — пример структуры.</div>
+
+  <div class="toc-item"><span>Введение</span><span>3</span></div>
+  <div class="toc-item"><span>1 АНАЛИЗ ПРЕДМЕТНОЙ ОБЛАСТИ</span><span>5</span></div>
+  <div class="toc-item toc-sub"><span>1.1 Описание предметной области</span><span>5</span></div>
+  <div class="toc-item toc-sub"><span>1.2 Обзор существующих аналогов</span><span>7</span></div>
+  <div class="toc-item toc-sub"><span>1.3 Обоснование разработки</span><span>9</span></div>
+  <div class="toc-item"><span>2 ПРОЕКТИРОВАНИЕ СИСТЕМЫ</span><span>11</span></div>
+  <div class="toc-item toc-sub"><span>2.1 Требования к системе</span><span>11</span></div>
+  <div class="toc-item toc-sub"><span>2.2 Проектирование базы данных</span><span>13</span></div>
+  <div class="toc-item toc-sub"><span>2.3 Проектирование интерфейса</span><span>16</span></div>
+  <div class="toc-item"><span>3 РЕАЛИЗАЦИЯ И ТЕСТИРОВАНИЕ</span><span>19</span></div>
+  <div class="toc-item toc-sub"><span>3.1 Программная реализация</span><span>19</span></div>
+  <div class="toc-item toc-sub"><span>3.2 Тестирование</span><span>24</span></div>
+  <div class="toc-item toc-sub"><span>3.3 Руководство пользователя</span><span>27</span></div>
+  <div class="toc-item"><span>Заключение</span><span>30</span></div>
+  <div class="toc-item"><span>Список использованных источников</span><span>32</span></div>
+  <div class="toc-item"><span>Приложение А. Техническое задание</span><span>34</span></div>
+  <div class="toc-item"><span>Приложение Б. Исходный код</span><span>35</span></div>
+  <div class="toc-item"><span>Приложение В. Скриншоты интерфейса</span><span>40</span></div>
+
+  <div class="page-num">2</div>
+</div>
+
+<!-- ======== СТРАНИЦА 3: ВВЕДЕНИЕ ======== -->
+<div class="page">
+  <h1>Введение</h1>
+  <div class="hint">Введение: 1,5–2 страницы. Не нумеруется как раздел.</div>
+
+  <p>
+    В современном мире информационные технологии играют ключевую роль в автоматизации процессов различных сфер деятельности.
+    <span class="placeholder">[Напишите 2–3 предложения об актуальности вашей темы: почему эта задача важна сегодня?]</span>
+  </p>
+
+  <p>
+    <span class="placeholder">[Опишите проблему, которую решает ваша система/приложение. Что происходит без неё? Какие неудобства испытывают пользователи?]</span>
+  </p>
+
+  <p>
+    Целью данной выпускной квалификационной работы является <span class="placeholder">[сформулируйте цель — разработка чего? для кого? с какой функциональностью?]</span>.
+  </p>
+
+  <p>Для достижения поставленной цели необходимо решить следующие задачи:</p>
+  <ul class="doc-list">
+    <li>провести анализ предметной области и изучить существующие аналоги;</li>
+    <li>сформулировать требования к разрабатываемой системе;</li>
+    <li>спроектировать базу данных и архитектуру приложения;</li>
+    <li>реализовать <span class="placeholder">[укажите основные модули/функции]</span>;</li>
+    <li>провести тестирование и оценить результаты работы.</li>
+  </ul>
+
+  <p>
+    <strong>Объектом исследования</strong> является <span class="placeholder">[область/процесс, который автоматизируется, например: «процесс учёта инвентаря в прокате спортивного оборудования»]</span>.
+  </p>
+
+  <p>
+    <strong>Предметом исследования</strong> является <span class="placeholder">[конкретный аспект, например: «методы и средства разработки информационных систем для автоматизации учёта»]</span>.
+  </p>
+
+  <p>
+    При выполнении работы использовались следующие методы: анализ предметной области, сравнительный анализ аналогов, объектно-ориентированное проектирование, метод прототипирования.
+  </p>
+
+  <p>
+    Практическая значимость работы заключается в том, что <span class="placeholder">[кто и как сможет использовать вашу разработку? какую пользу принесёт?]</span>.
+  </p>
+
+  <p>
+    Пояснительная записка состоит из введения, трёх разделов, заключения, списка использованных источников и приложений.
+  </p>
+
+  <div class="page-num">3</div>
+</div>
+
+<!-- ======== СТРАНИЦА 4: РАЗДЕЛ 1 ======== -->
+<div class="page">
+  <h2>1 Анализ предметной области</h2>
+  <div class="hint">Раздел 1 — аналитический. Объём: 8–12 страниц.</div>
+
+  <h3>1.1 Описание предметной области</h3>
+  <div class="hint">Расскажите о сфере, для которой делаете систему. Кто пользователи? Какие процессы происходят? Какие данные обрабатываются?</div>
+
+  <p>
+    <span class="placeholder">[Опишите предметную область: что это за сфера, как работает сейчас, кто участники процесса. Например, для гостиницы: как принимают гостей, ведут бронирование, учитывают номера и т.д.]</span>
+  </p>
+
+  <p>
+    <span class="placeholder">[Укажите основные понятия и термины, которые используются в данной области. Объясните их.]</span>
+  </p>
+
+  <h3>1.2 Обзор существующих аналогов</h3>
+  <div class="hint">Найдите 3–4 существующих программы/сервиса по вашей теме. Опишите каждый и сравните в таблице.</div>
+
+  <p>
+    На сегодняшний день существует ряд программных решений, реализующих функции, схожие с разрабатываемой системой. Рассмотрим основные из них.
+  </p>
+
+  <p>
+    <strong><span class="placeholder">[Название аналога 1]</span></strong> — <span class="placeholder">[краткое описание, что умеет, для кого, платный/бесплатный]</span>.
+  </p>
+
+  <p>
+    <strong><span class="placeholder">[Название аналога 2]</span></strong> — <span class="placeholder">[краткое описание]</span>.
+  </p>
+
+  <p>
+    <strong><span class="placeholder">[Название аналога 3]</span></strong> — <span class="placeholder">[краткое описание]</span>.
+  </p>
+
+  <p class="table-caption">Таблица 1 — Сравнение существующих аналогов</p>
+  <table class="doc-table">
+    <tr>
+      <th>Критерий</th>
+      <th><span class="placeholder">[Аналог 1]</span></th>
+      <th><span class="placeholder">[Аналог 2]</span></th>
+      <th><span class="placeholder">[Аналог 3]</span></th>
+      <th>Разрабатываемая система</th>
+    </tr>
+    <tr>
+      <td><span class="placeholder">[Критерий 1, например: Бесплатный доступ]</span></td>
+      <td>Нет</td><td>Да</td><td>Частично</td><td>Да</td>
+    </tr>
+    <tr>
+      <td><span class="placeholder">[Критерий 2]</span></td>
+      <td>Да</td><td>Нет</td><td>Да</td><td>Да</td>
+    </tr>
+    <tr>
+      <td><span class="placeholder">[Критерий 3]</span></td>
+      <td>Нет</td><td>Нет</td><td>Нет</td><td>Да</td>
+    </tr>
+    <tr>
+      <td><span class="placeholder">[Критерий 4]</span></td>
+      <td>Да</td><td>Да</td><td>Нет</td><td>Да</td>
+    </tr>
+  </table>
+
+  <h3>1.3 Обоснование разработки</h3>
+  <div class="hint">На основе сравнения аналогов объясните, почему нужна ваша система. Что она делает лучше или чего не хватает в существующих решениях?</div>
+
+  <p>
+    По результатам анализа существующих аналогов можно сделать вывод, что <span class="placeholder">[перечислите 2–3 недостатка аналогов: высокая стоимость, нет нужных функций, не адаптировано под конкретные условия и т.д.]</span>.
+  </p>
+
+  <p>
+    Таким образом, разработка собственной системы <span class="placeholder">[название]</span> является актуальной и обоснованной. Разрабатываемое решение позволит <span class="placeholder">[перечислите преимущества вашей разработки]</span>.
+  </p>
+
+  <div class="page-num">5</div>
+</div>
+
+<!-- ======== СТРАНИЦА 5: РАЗДЕЛ 2 ======== -->
+<div class="page">
+  <h2>2 Проектирование системы</h2>
+  <div class="hint">Раздел 2 — проектный. Объём: 8–12 страниц. Здесь проектируем, но ещё не пишем код.</div>
+
+  <h3>2.1 Требования к системе</h3>
+  <div class="hint">Опишите, что система должна делать (функциональные требования) и как (нефункциональные: производительность, безопасность и т.д.).</div>
+
+  <p>
+    На основе анализа предметной области были сформулированы требования к разрабатываемой системе.
+  </p>
+
+  <p><strong>Функциональные требования:</strong></p>
+  <ul class="doc-list">
+    <li><span class="placeholder">[Требование 1, например: система должна обеспечивать регистрацию и авторизацию пользователей]</span>;</li>
+    <li><span class="placeholder">[Требование 2]</span>;</li>
+    <li><span class="placeholder">[Требование 3]</span>;</li>
+    <li><span class="placeholder">[Требование 4]</span>;</li>
+    <li><span class="placeholder">[Требование 5]</span>.</li>
+  </ul>
+
+  <p><strong>Нефункциональные требования:</strong></p>
+  <ul class="doc-list">
+    <li>интерфейс должен быть интуитивно понятным и не требовать специальной подготовки;</li>
+    <li>система должна корректно работать на устройствах с ОС <span class="placeholder">[Android / Windows / укажите нужное]</span>;</li>
+    <li><span class="placeholder">[другие требования: скорость, безопасность данных и т.д.]</span>.</li>
+  </ul>
+
+  <h3>2.2 Проектирование базы данных</h3>
+  <div class="hint">Опишите сущности (таблицы), их атрибуты и связи. Приведите ER-диаграмму (в приложение) и описание таблиц.</div>
+
+  <p>
+    Для хранения данных разрабатываемой системы спроектирована реляционная база данных. База данных включает следующие сущности: <span class="placeholder">[перечислите таблицы через запятую]</span>.
+  </p>
+
+  <p class="table-caption">Таблица 2 — Описание таблицы «<span class="placeholder">[название таблицы]</span>»</p>
+  <table class="doc-table">
+    <tr>
+      <th>Поле</th>
+      <th>Тип данных</th>
+      <th>Описание</th>
+      <th>Ограничения</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>INTEGER</td>
+      <td>Уникальный идентификатор</td>
+      <td>PRIMARY KEY, AUTO INCREMENT</td>
+    </tr>
+    <tr>
+      <td><span class="placeholder">[поле 2]</span></td>
+      <td><span class="placeholder">[тип]</span></td>
+      <td><span class="placeholder">[описание]</span></td>
+      <td><span class="placeholder">[NOT NULL / UNIQUE / FK и т.д.]</span></td>
+    </tr>
+    <tr>
+      <td><span class="placeholder">[поле 3]</span></td>
+      <td><span class="placeholder">[тип]</span></td>
+      <td><span class="placeholder">[описание]</span></td>
+      <td></td>
+    </tr>
+  </table>
+
+  <div class="figure-box">
+    <span class="placeholder">[ER-диаграмма базы данных — вставьте изображение]</span>
+  </div>
+  <p class="figure-caption">Рисунок 1 — ER-диаграмма базы данных</p>
+
+  <h3>2.3 Проектирование интерфейса</h3>
+  <div class="hint">Опишите экраны/страницы приложения. Приведите макеты (можно из Figma или нарисованные от руки, отсканированные).</div>
+
+  <p>
+    На основе требований к системе разработаны макеты пользовательского интерфейса. Приложение включает следующие экраны: <span class="placeholder">[перечислите экраны/страницы]</span>.
+  </p>
+
+  <div class="figure-box">
+    <span class="placeholder">[Макет главного экрана — вставьте изображение из Figma или скриншот]</span>
+  </div>
+  <p class="figure-caption">Рисунок 2 — Макет главного экрана</p>
+
+  <p>
+    <span class="placeholder">[Опишите, что изображено на макете, как пользователь взаимодействует с экраном]</span>.
+  </p>
+
+  <div class="page-num">11</div>
+</div>
+
+<!-- ======== СТРАНИЦА 6: РАЗДЕЛ 3 ======== -->
+<div class="page">
+  <h2>3 Реализация и тестирование</h2>
+  <div class="hint">Раздел 3 — практический. Объём: 10–15 страниц. Описываете готовую работу: стек, код, скриншоты, тесты.</div>
+
+  <h3>3.1 Программная реализация</h3>
+  <div class="hint">Опишите выбранный стек технологий с обоснованием. Покажите ключевые фрагменты кода с пояснениями.</div>
+
+  <p>
+    Для реализации <span class="placeholder">[название системы]</span> был выбран следующий стек технологий:
+  </p>
+
+  <p class="table-caption">Таблица 3 — Используемые технологии</p>
+  <table class="doc-table">
+    <tr><th>Компонент</th><th>Технология</th><th>Обоснование выбора</th></tr>
+    <tr>
+      <td><span class="placeholder">[Язык программирования]</span></td>
+      <td><span class="placeholder">[Kotlin / Python / JS и т.д.]</span></td>
+      <td><span class="placeholder">[почему выбрали]</span></td>
+    </tr>
+    <tr>
+      <td><span class="placeholder">[БД / хранилище]</span></td>
+      <td><span class="placeholder">[Room / SQLite / MySQL]</span></td>
+      <td><span class="placeholder">[почему выбрали]</span></td>
+    </tr>
+    <tr>
+      <td><span class="placeholder">[Среда разработки]</span></td>
+      <td><span class="placeholder">[Android Studio / VS Code]</span></td>
+      <td><span class="placeholder">[почему выбрали]</span></td>
+    </tr>
+    <tr>
+      <td><span class="placeholder">[Доп. библиотеки]</span></td>
+      <td><span class="placeholder">[названия]</span></td>
+      <td><span class="placeholder">[назначение]</span></td>
+    </tr>
+  </table>
+
+  <p>
+    Разработка велась в среде <span class="placeholder">[название IDE]</span>. Архитектура приложения построена по паттерну <span class="placeholder">[MVVM / MVC / укажите свой]</span>, что обеспечивает <span class="placeholder">[разделение логики и представления / удобство тестирования / и т.д.]</span>.
+  </p>
+
+  <p>
+    На рисунке <span class="placeholder">[N]</span> представлена структура проекта.
+  </p>
+
+  <div class="figure-box">
+    <span class="placeholder">[Скриншот структуры проекта в IDE — вставьте изображение]</span>
+  </div>
+  <p class="figure-caption">Рисунок <span class="placeholder">[N]</span> — Структура проекта</p>
+
+  <p>
+    Рассмотрим реализацию ключевых модулей системы. <span class="placeholder">[Опишите 2–3 основных модуля/функции. Для каждого: что делает, фрагмент кода, пояснение к коду. Полный код — в Приложение Б.]</span>
+  </p>
+
+  <div class="figure-box" style="text-align:left; font-family: 'Courier New', monospace; font-size: 11pt; background:#f5f5f5;">
+    <span class="placeholder">// Фрагмент кода — вставьте сюда ключевой метод или функцию<br>
+    // Например: метод добавления записи в БД, запрос к API и т.д.<br>
+    fun example() {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;// ваш код<br>
+    }</span>
+  </div>
+  <p class="figure-caption">Листинг 1 — <span class="placeholder">[Описание фрагмента кода]</span></p>
+
+  <h3>3.2 Тестирование</h3>
+  <div class="hint">Опишите, как проверяли работу системы. Минимум: таблица тест-кейсов с результатами.</div>
+
+  <p>
+    В ходе разработки проводилось функциональное тестирование системы. Тестирование выполнялось методом «чёрного ящика»: проверялось соответствие выходных данных ожидаемым результатам при различных входных данных.
+  </p>
+
+  <p class="table-caption">Таблица 4 — Результаты тестирования</p>
+  <table class="doc-table">
+    <tr>
+      <th>№</th>
+      <th>Тестируемая функция</th>
+      <th>Входные данные</th>
+      <th>Ожидаемый результат</th>
+      <th>Фактический результат</th>
+      <th>Статус</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td><span class="placeholder">[Функция 1]</span></td>
+      <td><span class="placeholder">[данные]</span></td>
+      <td><span class="placeholder">[что должно произойти]</span></td>
+      <td><span class="placeholder">[что произошло]</span></td>
+      <td>Пройден</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><span class="placeholder">[Функция 2]</span></td>
+      <td><span class="placeholder">[данные]</span></td>
+      <td><span class="placeholder">[ожидание]</span></td>
+      <td><span class="placeholder">[результат]</span></td>
+      <td>Пройден</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><span class="placeholder">[Функция 3]</span></td>
+      <td><span class="placeholder">[данные]</span></td>
+      <td><span class="placeholder">[ожидание]</span></td>
+      <td><span class="placeholder">[результат]</span></td>
+      <td>Пройден</td>
+    </tr>
+  </table>
+
+  <p>
+    По результатам тестирования все заявленные функции работают корректно. Выявленные в ходе тестирования ошибки были устранены.
+  </p>
+
+  <h3>3.3 Руководство пользователя</h3>
+  <div class="hint">Кратко опишите, как запустить и пользоваться системой. Подкрепите скриншотами готового приложения.</div>
+
+  <p>
+    Для начала работы с <span class="placeholder">[название системы]</span> необходимо <span class="placeholder">[описать установку/запуск: скачать APK и установить / открыть в браузере по адресу / запустить exe и т.д.]</span>.
+  </p>
+
+  <div class="figure-box">
+    <span class="placeholder">[Скриншот готового приложения — главный экран]</span>
+  </div>
+  <p class="figure-caption">Рисунок <span class="placeholder">[N]</span> — Главный экран <span class="placeholder">[название системы]</span></p>
+
+  <p>
+    <span class="placeholder">[Опишите основные действия пользователя: как войти, как добавить запись, как посмотреть результат и т.д. Сопроводите скриншотами.]</span>
+  </p>
+
+  <div class="page-num">19</div>
+</div>
+
+<!-- ======== СТРАНИЦА 7: ЗАКЛЮЧЕНИЕ ======== -->
+<div class="page">
+  <h1>Заключение</h1>
+  <div class="hint">Заключение: 1–1,5 страницы. Без новой информации — только выводы по проделанной работе.</div>
+
+  <p>
+    В ходе выполнения выпускной квалификационной работы была достигнута поставленная цель: <span class="placeholder">[повторите формулировку цели из введения]</span>.
+  </p>
+
+  <p>Для достижения цели были решены следующие задачи:</p>
+  <ul class="doc-list">
+    <li>проведён анализ предметной области <span class="placeholder">[кратко: что выяснили]</span>;</li>
+    <li>выполнен обзор существующих аналогов, выявлены их достоинства и недостатки;</li>
+    <li>сформулированы требования к разрабатываемой системе;</li>
+    <li>спроектирована база данных, включающая <span class="placeholder">[N]</span> таблиц;</li>
+    <li>реализована система с использованием <span class="placeholder">[перечислите стек]</span>;</li>
+    <li>проведено тестирование, подтвердившее корректность работы всех модулей.</li>
+  </ul>
+
+  <p>
+    Разработанная система <span class="placeholder">[название]</span> позволяет <span class="placeholder">[перечислите основные возможности: что умеет делать система]</span>.
+  </p>
+
+  <p>
+    Практическая значимость работы состоит в том, что <span class="placeholder">[кто и как может использовать результат: конкретный детский сад / спортивный прокат / пользователи приложения и т.д.]</span>.
+  </p>
+
+  <p>
+    В перспективе возможно развитие системы в следующих направлениях: <span class="placeholder">[что можно доработать в будущем: добавить модуль X, реализовать интеграцию с Y, перенести на облачный сервер и т.д.]</span>.
+  </p>
+
+  <div class="page-num">30</div>
+</div>
+
+<!-- ======== СТРАНИЦА 8: СПИСОК ИСТОЧНИКОВ ======== -->
+<div class="page">
+  <h1>Список использованных источников</h1>
+  <div class="hint">Минимум 15–20 источников. Оформление по ГОСТ 7.0.100-2018. Сортировка: по алфавиту или по порядку упоминания в тексте. Сначала — книги и статьи, затем — электронные ресурсы.</div>
+
+  <ol class="doc-list">
+    <li><span class="placeholder">[Автор И.О.] [Название книги]. — [Город]: [Издательство], [Год]. — [Кол-во] с.</span></li>
+    <li><span class="placeholder">[Автор И.О.] [Название статьи] // [Название журнала]. — [Год]. — № [номер]. — С. [страницы].</span></li>
+    <li><span class="placeholder">[Название сайта/документации] [Электронный ресурс]. — URL: [адрес] (дата обращения: [дд.мм.гггг]).</span></li>
+    <li><span class="placeholder">[добавьте нужное количество источников]</span></li>
+  </ol>
+
+  <br>
+  <div class="hint">
+    <strong>Примеры оформления:</strong><br><br>
+    Книга: Прохоренок Н.А., Дронов В.А. HTML, JavaScript, PHP и MySQL. — СПб.: БХВ-Петербург, 2022. — 768 с.<br><br>
+    Сайт: Документация Android Developers [Электронный ресурс]. — URL: https://developer.android.com (дата обращения: 10.04.2026).<br><br>
+    ГОСТ: ГОСТ 7.0.100-2018. Библиографическая запись. Библиографическое описание. — М.: Стандартинформ, 2018. — 124 с.
+  </div>
+
+  <div class="page-num">32</div>
+</div>
+
+<!-- ======== СТРАНИЦА 9: ПРИЛОЖЕНИЯ ======== -->
+<div class="page">
+  <h1>Приложение А</h1>
+  <h2 style="text-align:center; text-transform: none; font-size:14pt;">Техническое задание</h2>
+  <div class="hint">Вставьте сюда утверждённое техническое задание на разработку.</div>
+  <p class="placeholder">[Текст технического задания]</p>
+
+  <div class="page-num">34</div>
+</div>
+
+<div class="page">
+  <h1>Приложение Б</h1>
+  <h2 style="text-align:center; text-transform: none; font-size:14pt;">Исходный код программы</h2>
+  <div class="hint">Вставьте полный листинг исходного кода. Шрифт кода: Courier New, 12 пт. Можно разбить на несколько приложений по файлам/модулям.</div>
+
+  <div style="font-family: 'Courier New', monospace; font-size: 11pt; background:#f5f5f5; padding: 10px; border: 1px solid #ddd;">
+    <span class="placeholder">// Полный исходный код вашего проекта<br>
+    // Разбейте на логические части с комментариями<br><br>
+    // === Файл: MainActivity.kt ===<br>
+    // [вставьте код]<br><br>
+    // === Файл: DatabaseHelper.kt ===<br>
+    // [вставьте код]</span>
+  </div>
+
+  <div class="page-num">35</div>
+</div>
+
+<div class="page">
+  <h1>Приложение В</h1>
+  <h2 style="text-align:center; text-transform: none; font-size:14pt;">Скриншоты интерфейса</h2>
+  <div class="hint">Вставьте скриншоты всех основных экранов готового приложения.</div>
+
+  <div class="figure-box"><span class="placeholder">[Скриншот экрана 1]</span></div>
+  <p class="figure-caption">Рисунок В.1 — <span class="placeholder">[Название экрана]</span></p>
+
+  <div class="figure-box"><span class="placeholder">[Скриншот экрана 2]</span></div>
+  <p class="figure-caption">Рисунок В.2 — <span class="placeholder">[Название экрана]</span></p>
+
+  <div class="figure-box"><span class="placeholder">[Скриншот экрана 3]</span></div>
+  <p class="figure-caption">Рисунок В.3 — <span class="placeholder">[Название экрана]</span></p>
+
+  <div class="page-num">40</div>
+</div>
+
+</body>
+</html>
